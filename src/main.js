@@ -13,7 +13,7 @@ import {
     Submenu,
     MenuItem,
     MenuItemGroup,
-    // Input,
+    Input,
     // InputNumber,
     // Radio,
     // RadioGroup,
@@ -25,7 +25,7 @@ import {
     // Select,
     // Option,
     // OptionGroup,
-    // Button,
+    Button,
     // ButtonGroup,
     // Table,
     // TableColumn,
@@ -92,7 +92,7 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
-// Vue.use(Input)
+Vue.use(Input)
 // Vue.use(InputNumber)
 // Vue.use(Radio)
 // Vue.use(RadioGroup)
@@ -104,7 +104,7 @@ Vue.use(MenuItemGroup)
 // Vue.use(Select)
 // Vue.use(Option)
 // Vue.use(OptionGroup)
-// Vue.use(Button)
+Vue.use(Button)
 // Vue.use(ButtonGroup)
 // Vue.use(Table)
 // Vue.use(TableColumn)
