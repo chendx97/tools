@@ -4,22 +4,28 @@
 		<div class="format-wrap">
 			<div class="format-item">
 				<p>rgba格式</p>
-				<el-input placeholder="如255, 0, 0, 1" size="small" />
-				<el-button size="small">转换</el-button>
+				<el-input
+					placeholder="如rgba(255, 0, 0, 1)、rgba(255, 0, 0)、255, 0, 0, 1、255, 0, 0"
+					size="small"
+					v-model="rgbaVal"
+					clearable
+				/>
+				<el-button size="small" @click="transferRgba">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>十六进制格式</p>
-				<el-input placeholder="如#ff0000" size="small" />
-				<el-button size="small">转换</el-button>
+				<el-input placeholder="如#ff0000、ff0000、f00" size="small" v-model="hexadecimalVal" clearable />
+				<el-input-number size="small" v-model="opacityVal" :precision="1" :step="0.1" :max="1"></el-input-number>
+				<el-button size="small" @click="transferHexadecimal">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>常量名格式</p>
-				<el-input placeholder="如red" size="small" />
+				<el-input placeholder="如red" size="small" v-model="constantVal" clearable />
 				<el-button size="small">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>预览</p>
-				<div class="preview"></div>
+				<div class="preview" :style="`background: ${this.color}`"></div>
 			</div>
 		</div>
 		<div class="list-wrap">
@@ -480,7 +486,12 @@ export default {
 				'yellowgreen',
 				'#9acd32',
 				'154, 205, 50'
-			]
+			],
+			color: '#fff',
+			rgbaVal: '',
+			hexadecimalVal: '',
+			constantVal: '',
+			opacityVal: 1
 		}
 	},
 	computed: {
@@ -495,13 +506,81 @@ export default {
 			}
 			return arr
 		}
+	},
+	methods: {
+		transferRgba () {
+			let value = this.rgbaVal.replace('rgba(', '').replace(')', '')
+			let rgba = value.split(',')
+			if ([3, 4].includes(rgba.length)) {
+				let a = (rgba[3] || 1) >= 1 ? 1 : rgba[3]
+				let r = Math.floor(a * parseInt(rgba[0]) + (1 - a) * 255)
+				let g = Math.floor(a * parseInt(rgba[1]) + (1 - a) * 255)
+				let b = Math.floor(a * parseInt(rgba[2]) + (1 - a) * 255)
+				this.hexadecimalVal = "#" +
+					("0" + r.toString(16)).slice(-2) +
+					("0" + g.toString(16)).slice(-2) +
+					("0" + b.toString(16)).slice(-2)
+				this.opacityVal = 1
+				this.constantVal = ''
+				this.colorValList.map(item => {
+					if (item.hexadecimal === this.hexadecimalVal) {
+						this.constantVal = item.constant
+					}
+				})
+				this.color = this.hexadecimalVal
+			} else {
+				this.$message({
+					type: 'error',
+					message: '格式错误，请输入如rgba(255, 0, 0, 1)、rgba(255, 0, 0)、255, 0, 0, 1、255, 0, 0的数据'
+				})
+				this.color = '#fff'
+				this.constantVal = ''
+				this.rgbaVal = ''
+			}
+		},
+		transferHexadecimal () {
+			var reg = /^#?([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/
+			var sColor = this.hexadecimalVal.toLowerCase()
+			if (sColor && reg.test(sColor)) {
+				if (sColor.slice(0, 1) !== '#') {
+					sColor = '#' + sColor
+				}
+				if (sColor.length === 4) {
+					var sColorNew = "#"
+					for (var i = 1; i < 4; i += 1) {
+						sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1))
+					}
+					sColor = sColorNew
+				}
+				var sColorChange = []
+				for (var i = 1; i < 7; i += 2) {
+					sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)))
+				}
+				this.constantVal = ''
+				this.colorValList.map(item => {
+					if (item.hexadecimal === sColor) {
+						this.constantVal = item.constant
+					}
+				})
+				this.color = sColor
+				return this.rgbaVal = "rgba(" + sColorChange.join(",") + "," + this.opacityVal + ")"
+			} else {
+				this.$message({
+					type: 'error',
+					message: '格式错误，请输入如#ff0000、ff0000、f00的数据'
+				})
+				this.color = '#fff'
+				this.constantVal = ''
+				this.rgbaVal = ''
+			}
+		}
 	}
 }
 </script>
 
 <style lang="stylus" scoped>
 .color {
-	max-width: 1000px;
+	max-width: 1100px;
 	padding-left: 150px;
 
 	.format-wrap {
@@ -512,6 +591,10 @@ export default {
 		.format-item {
 			.el-input {
 				width: 200px;
+				margin-right: 5px;
+			}
+
+			.el-input-number {
 				margin-right: 5px;
 			}
 
@@ -543,7 +626,7 @@ export default {
 				padding: 0 10px;
 
 				&:nth-child(2) {
-					width: 100px;
+					width: 135px;
 				}
 			}
 		}
