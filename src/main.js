@@ -18,9 +18,9 @@ import {
     // Radio,
     // RadioGroup,
     // RadioButton,
-    // Checkbox,
+    Checkbox,
     // CheckboxButton,
-    // CheckboxGroup,
+    CheckboxGroup,
     // Switch,
     // Select,
     // Option,
@@ -97,9 +97,9 @@ Vue.use(InputNumber)
 // Vue.use(Radio)
 // Vue.use(RadioGroup)
 // Vue.use(RadioButton)
-// Vue.use(Checkbox)
+Vue.use(Checkbox)
 // Vue.use(CheckboxButton)
-// Vue.use(CheckboxGroup)
+Vue.use(CheckboxGroup)
 // Vue.use(Switch)
 // Vue.use(Select)
 // Vue.use(Option)
