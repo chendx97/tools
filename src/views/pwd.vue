@@ -22,7 +22,10 @@
 			<el-input-number v-model="pwdCount" :step="1" size="mini"></el-input-number>
 		</div>
 		<el-button type="primary" size="mini" @click="generateResult">生成</el-button>
-		<p class="pwd-text">{{pwdVal}}</p>
+		<p class="pwd-wrap">
+			<input class="pwd-text" v-model="pwdVal" />
+			<i v-if="pwdVal" @click="copyPwd" class="el-icon-document-copy icon-copy"></i>
+		</p>
 	</div>
 </template>
 
@@ -140,6 +143,15 @@ export default {
 					this.pwdVal = this.pwdVal.toUpperCase()
 				}
 			}
+		},
+		copyPwd () {
+			let pwd = document.querySelector('.pwd-text')
+			pwd.select()
+			document.execCommand("Copy")
+			this.$message({
+				type: 'success',
+				message: '复制成功！'
+			})
 		}
 	}
 }
@@ -153,12 +165,20 @@ export default {
 		width: 100px;
 	}
 
-	.pwd-text {
-		border: 1px solid #ddd;
-		width: 300px;
-		height: 26px;
-		padding: 4px 0;
-		border-radius: 5px;
+	.pwd-wrap {
+		.pwd-text {
+			display: inline-block;
+			border: 1px solid #ddd;
+			width: 300px;
+			height: 26px;
+			padding: 4px 0;
+			border-radius: 5px;
+		}
+
+		.icon-copy {
+			cursor: pointer;
+			margin-left: 5px;
+		}
 	}
 
 	.el-button {
