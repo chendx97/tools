@@ -14,7 +14,7 @@ import {
     MenuItem,
     MenuItemGroup,
     Input,
-    // InputNumber,
+    InputNumber,
     // Radio,
     // RadioGroup,
     // RadioButton,
@@ -78,7 +78,7 @@ import {
     // CascaderPanel,
     // Loading,
     // MessageBox,
-    // Message,
+    Message,
     // Notification
 } from 'element-ui'
 
@@ -93,7 +93,7 @@ Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(Input)
-// Vue.use(InputNumber)
+Vue.use(InputNumber)
 // Vue.use(Radio)
 // Vue.use(RadioGroup)
 // Vue.use(RadioButton)
@@ -163,7 +163,7 @@ Vue.use(Button)
 // Vue.prototype.$confirm = MessageBox.confirm
 // Vue.prototype.$prompt = MessageBox.prompt
 // Vue.prototype.$notify = Notification
-// Vue.prototype.$message = Message
+Vue.prototype.$message = Message
 
 Vue.config.productionTip = false
 

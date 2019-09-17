@@ -4,24 +4,22 @@
 		<div class="format-wrap">
 			<div class="format-item">
 				<p>rgba格式</p>
-				<el-input
-					placeholder="如rgba(255, 0, 0, 1)、rgba(255, 0, 0)、255, 0, 0, 1、255, 0, 0"
-					size="small"
-					v-model="rgbaVal"
-					clearable
-				/>
+				<p class="tip-text">如rgba(255, 0, 0, 1)、rgba(255, 0, 0)、255, 0, 0, 1、255, 0, 0</p>
+				<el-input placeholder="请输入rgba格式" size="small" v-model="rgbaVal" clearable />
 				<el-button size="small" @click="transferRgba">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>十六进制格式</p>
-				<el-input placeholder="如#ff0000、ff0000、f00" size="small" v-model="hexadecimalVal" clearable />
+				<p class="tip-text">如#ff0000、ff0000、f00</p>
+				<el-input placeholder="请输入十六进制格式" size="small" v-model="hexadecimalVal" clearable />
 				<el-input-number size="small" v-model="opacityVal" :precision="1" :step="0.1" :max="1"></el-input-number>
 				<el-button size="small" @click="transferHexadecimal">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>常量名格式</p>
-				<el-input placeholder="如red" size="small" v-model="constantVal" clearable />
-				<el-button size="small">转换</el-button>
+				<p class="tip-text">如red</p>
+				<el-input placeholder="请输入常量名格式" size="small" v-model="constantVal" clearable />
+				<el-button size="small" @click="transferConstant">转换</el-button>
 			</div>
 			<div class="format-item">
 				<p>预览</p>
@@ -556,22 +554,40 @@ export default {
 				for (var i = 1; i < 7; i += 2) {
 					sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)))
 				}
+				this.rgbaVal = "rgba(" + sColorChange.join(",") + "," + this.opacityVal + ")"
 				this.constantVal = ''
 				this.colorValList.map(item => {
-					if (item.hexadecimal === sColor) {
+					if (item.rgbaVal === this.rgbaVal) {
 						this.constantVal = item.constant
 					}
 				})
-				this.color = sColor
-				return this.rgbaVal = "rgba(" + sColorChange.join(",") + "," + this.opacityVal + ")"
+				this.color = this.rgbaVal
 			} else {
 				this.$message({
 					type: 'error',
 					message: '格式错误，请输入如#ff0000、ff0000、f00的数据'
 				})
-				this.color = '#fff'
+				this.color = ''
 				this.constantVal = ''
 				this.rgbaVal = ''
+			}
+		},
+		transferConstant () {
+			let flag = false
+			this.colorValList.map(item => {
+				if (item.constant === this.constantVal) {
+					flag = true
+					this.hexadecimalVal = item.hexadecimal
+					this.rgbaVal = item.rgbaVal
+					this.opacityVal = 1
+					this.color = this.constantVal
+				}
+			})
+			if (!flag) {
+				this.hexadecimalVal = ''
+				this.rgbaVal = ''
+				this.opacityVal = 1
+				this.color = ''
 			}
 		}
 	}
@@ -580,13 +596,12 @@ export default {
 
 <style lang="stylus" scoped>
 .color {
-	max-width: 1100px;
+	max-width: 1150px;
 	padding-left: 150px;
 
 	.format-wrap {
 		display: flex;
 		justify-content: space-between;
-		padding: 0 20px;
 
 		.format-item {
 			.el-input {
@@ -603,6 +618,11 @@ export default {
 				height: 100px;
 				border: 1px solid #eee;
 			}
+
+			.tip-text {
+				font-size: 10px;
+				color: #888;
+			}
 		}
 	}
 
@@ -610,6 +630,7 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
+		padding-bottom: 10px;
 
 		.color-item {
 			display: flex;
