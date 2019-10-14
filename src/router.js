@@ -19,6 +19,11 @@ export default new Router({
             component: () => import(/* webpackChunkName: "pwd" */ './views/pwd.vue')
         },
         {
+            path: '/time',
+            name: 'timeTrans',
+            component: () => import(/* webpackChunkName: "time" */ './views/timeTrans.vue')
+        },
+        {
             path: '*',
             name: 'notFound',
             component: () => import(/* webpackChunkName: "notFound" */ './views/notFound.vue')

@@ -25,6 +25,11 @@ export default {
 					icon: 'icon-mima',
 					url: '/pwd'
 				},
+				{
+					title: '时间转换',
+					icon: 'el-icon-time',
+					url: '/time'
+				},
 			]
 		}
 	},
