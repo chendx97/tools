@@ -22,12 +22,12 @@ export default {
 				},
 				{
 					title: '生成随机密码',
-					icon: 'icon-mima',
+					icon: 'icon-iconfontmima',
 					url: '/pwd'
 				},
 				{
 					title: '时间转换',
-					icon: 'el-icon-time',
+					icon: 'icon-shijian',
 					url: '/time'
 				},
 			]

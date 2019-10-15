@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "540871",
+      "name": "密码",
+      "font_class": "iconfontmima",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "2452398",
+      "name": "颜色",
+      "font_class": "yanse",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "10253592",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    }
+  ]
+}
