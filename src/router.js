@@ -24,6 +24,11 @@ export default new Router({
             component: () => import(/* webpackChunkName: "time" */ './views/timeTrans.vue')
         },
         {
+            path: '/specialSign',
+            name: 'specialSign',
+            component: () => import(/* webpackChunkName: "specialSign" */ './views/specialSign.vue')
+        },
+        {
             path: '*',
             name: 'notFound',
             component: () => import(/* webpackChunkName: "notFound" */ './views/notFound.vue')

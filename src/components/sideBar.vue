@@ -30,6 +30,11 @@ export default {
 					icon: 'icon-shijian',
 					url: '/time'
 				},
+				{
+					title: '特殊符号',
+					icon: 'icon-fuhao',
+					url: '/specialSign'
+				},
 			]
 		}
 	},
