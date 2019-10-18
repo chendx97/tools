@@ -29,9 +29,9 @@ import {
     // ButtonGroup,
     Table,
     TableColumn,
-    // DatePicker,
+    DatePicker,
     // TimeSelect,
-    // TimePicker,
+    TimePicker,
     // Popover,
     // Tooltip,
     // Breadcrumb,
@@ -108,9 +108,9 @@ Vue.use(Button)
 // Vue.use(ButtonGroup)
 Vue.use(Table)
 Vue.use(TableColumn)
-// Vue.use(DatePicker)
+Vue.use(DatePicker)
 // Vue.use(TimeSelect)
-// Vue.use(TimePicker)
+Vue.use(TimePicker)
 // Vue.use(Popover)
 // Vue.use(Tooltip)
 // Vue.use(Breadcrumb)
