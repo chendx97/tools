@@ -2,6 +2,7 @@
 	<div id="app">
 		<sideBar v-if="isSideVisible"></sideBar>
 		<router-view />
+		<a class="beian" target="_blank" href="http://www.beian.miit.gov.cn">浙ICP备19027404号</a>
 	</div>
 </template>
 
@@ -30,6 +31,19 @@ export default {
 <style lang="stylus" scoped>
 body {
 	margin: 0px;
+}
+#app {
+	padding-bottom: 20px;
+}
+.beian {
+	text-align: center;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+	position: fixed;
+    bottom: 0px;
+	background: #fff;
+    width: 100%;
 }
 </style>
 <style lang="stylus">
